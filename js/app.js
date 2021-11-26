@@ -141,3 +141,11 @@ equals.addEventListener('click', function() {
     secondNumber = 0;
     operator = '';
 });
+
+clear.addEventListener('click', function() {
+    result.innerHTML = 0;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = '';
+    isFirstNumber = true;
+})
