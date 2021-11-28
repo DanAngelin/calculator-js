@@ -14,24 +14,37 @@ const multiply = document.querySelector('#multiply');
 const divide = document.querySelector('#divide');
 const modulo = document.querySelector('#modulo');
 const radical = document.querySelector('#radical');
+const point = document.querySelector('#point');
 const equals = document.querySelector('#equals');
 const clear = document.querySelector('#clear');
 const result = document.querySelector('.result');
-document.querySelector('.result').style.fontSize = "1.2em";
+const history = document.querySelector('.history');
 
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
 let isFirstNumber = true;
+let lastOperator = "";
+let pointNumber = false;
 
 function buildNumber(digit) {
-    if (isFirstNumber) {
+    if (digit === "." || pointNumber) {
+        if (isFirstNumber) {
+            firstNumber = firstNumber + digit;
+            result.innerText = firstNumber;
+        } else {
+            secondNumber = secondNumber + digit;
+            result.innerText = secondNumber;
+        } 
+        pointNumber = true;
+    }
+    else if (isFirstNumber) {
         firstNumber = (firstNumber * 10) + digit;
         result.innerText = firstNumber;
     } else {
         secondNumber = (secondNumber * 10) + digit;
         result.innerText = secondNumber;
-    }
+    } 
 }
 
 digit0.addEventListener('click', function() {
@@ -74,45 +87,105 @@ digit9.addEventListener('click', function() {
     buildNumber(9);
 });
 
+point.addEventListener('click', function() {
+    buildNumber(".");
+});
+
+
 multiply.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "*";
     result.innerText = operator;
+    if (lastOperator !== "") {
+        firstNumber = operation(lastOperator);
+        secondNumber = 0;
+    }
+    
+    lastOperator = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 add.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "+";
     result.innerText = operator;
+    if (lastOperator !== "") {
+        firstNumber = operation(lastOperator);
+        secondNumber = 0;
+    }
+    
+    lastOperator = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 subtract.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "-";
     result.innerText = operator;
+    if (lastOperator !== "") {
+        firstNumber = operation(lastOperator);
+        secondNumber = 0;
+    }
+    
+    lastOperator = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 divide.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "/";
     result.innerText = operator;
+    if (lastOperator !== "") {
+        firstNumber = operation(lastOperator);
+        secondNumber = 0;
+    }
+    
+    lastOperator = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 modulo.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "%";
     result.innerText = operator;
+    if (lastOperator !== "") {
+        firstNumber = operation(lastOperator);
+        secondNumber = 0;
+    }
+    
+    lastOperator = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 radical.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "√";
     result.innerText = operator;
+    history.innerText = `${firstNumber} ${operator}`;
 });
 
 equals.addEventListener('click', function() {
-    let res = 0;
+    res = operation(operator);
 
+    result.innerText = res;
+    firstNumber = res;
+    secondNumber = 0;
+    operator = '';
+});
+
+clear.addEventListener('click', function() {
+    result.innerText = 0;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = '';
+    isFirstNumber = true;
+    history.innerText = "";
+})
+
+function operation(operator) {
+    let res = 0;
+firstNumber = parseFloat(firstNumber);
+secondNumber = parseFloat(secondNumber);
     switch (operator) {
         case '*':
             res = firstNumber * secondNumber;
@@ -135,17 +208,5 @@ equals.addEventListener('click', function() {
         default:
             alert("Stop");
     }
-
-    result.innerText = res;
-    firstNumber = res;
-    secondNumber = 0;
-    operator = '';
-});
-
-clear.addEventListener('click', function() {
-    result.innerHTML = 0;
-    firstNumber = 0;
-    secondNumber = 0;
-    operator = '';
-    isFirstNumber = true;
-})
+    return res;
+}
