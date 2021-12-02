@@ -91,11 +91,7 @@ point.addEventListener('click', function() {
     buildNumber(".");
 });
 
-
-multiply.addEventListener('click', function() {
-    isFirstNumber = false;
-    operator = "*";
-    result.innerText = operator;
+function multipleOperations() {
     if (lastOperator !== "") {
         firstNumber = operation(lastOperator);
         secondNumber = 0;
@@ -103,58 +99,40 @@ multiply.addEventListener('click', function() {
     
     lastOperator = operator;
     history.innerText = `${firstNumber} ${operator}`;
+}
+
+multiply.addEventListener('click', function() {
+    isFirstNumber = false;
+    operator = "*";
+    multipleOperations();
 });
 
 add.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "+";
     result.innerText = operator;
-    if (lastOperator !== "") {
-        firstNumber = operation(lastOperator);
-        secondNumber = 0;
-    }
-    
-    lastOperator = operator;
-    history.innerText = `${firstNumber} ${operator}`;
+    multipleOperations();
 });
 
 subtract.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "-";
     result.innerText = operator;
-    if (lastOperator !== "") {
-        firstNumber = operation(lastOperator);
-        secondNumber = 0;
-    }
-    
-    lastOperator = operator;
-    history.innerText = `${firstNumber} ${operator}`;
+    multipleOperations();
 });
 
 divide.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "/";
     result.innerText = operator;
-    if (lastOperator !== "") {
-        firstNumber = operation(lastOperator);
-        secondNumber = 0;
-    }
-    
-    lastOperator = operator;
-    history.innerText = `${firstNumber} ${operator}`;
+    multipleOperations();
 });
 
 modulo.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "%";
     result.innerText = operator;
-    if (lastOperator !== "") {
-        firstNumber = operation(lastOperator);
-        secondNumber = 0;
-    }
-    
-    lastOperator = operator;
-    history.innerText = `${firstNumber} ${operator}`;
+    multipleOperations();
 });
 
 radical.addEventListener('click', function() {
@@ -166,7 +144,6 @@ radical.addEventListener('click', function() {
 
 equals.addEventListener('click', function() {
     res = operation(operator);
-
     result.innerText = res;
     firstNumber = res;
     secondNumber = 0;
@@ -180,6 +157,7 @@ clear.addEventListener('click', function() {
     operator = '';
     isFirstNumber = true;
     history.innerText = "";
+    lastOperator = "";
 })
 
 function operation(operator) {
