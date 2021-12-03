@@ -11,25 +11,17 @@ body{
     display: flex;
 }
 .calculator {
-    margin: 10em auto;
+    margin: auto;
     height: 40em;
-    background: linear-gradient(to left, #0f2027, #203a43, #2c5364);
+    background: rgba(163,218,255, 0.2);
     position: relative;
     border-radius: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
-}
-
-.border {
-    border-top: 5px solid black;
-    border-radius: 2em;
-    height: 5%;
-}
-
-h2 {
-    text-align: center;
+    box-shadow: 10px 10px 10px rgba(3,166,255, 0.5); 
+    border-top: 5px solid #1EC0FF;
+    border-bottom: 5px solid #1EC0FF;
 }
 
 .line button {
@@ -42,7 +34,7 @@ h2 {
     position: abolute;
     font-size: 0.9em;
     font-weight: 600;
-    background: linear-gradient(45deg,#000000, #7B7B7B);
+    background: linear-gradient(45deg,#03A6FF, #0080FF);
     color: white;
 }
 
@@ -53,8 +45,6 @@ h2 {
     justify-content: flex-end;
     height: 60%;
     padding: 1em;
-    background-color: linear-gradient(45deg,#000000, #7B7B7B);
-    bottom: 0;
     border-radius: 1em;
 }
 
@@ -65,11 +55,11 @@ h2 {
 }
 
 .display {
-    background-color: black;
+    background: rgba(0, 0, 0, 0.5);
     width: 90%;
-    margin: auto;
+    margin: 0 auto 2em auto;
     border-radius: 1em;
-    height: 20%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -86,7 +76,7 @@ h2 {
 .history {
     margin: 0.1em 1em;
     text-align: end;
-    color: white;
+    color: #03A6FF;
     font-size: 1em;
 }
 
@@ -99,5 +89,5 @@ h2 {
 }
 
 #multiply, #add, #subtract, #divide {
-    background: #5C33F6;
+    background-color: #5C33F6;
 }
