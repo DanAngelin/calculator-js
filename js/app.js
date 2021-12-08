@@ -18,26 +18,24 @@ let lastOperator = "";
 let pointNumber = false;
 
 function buildNumber(digit) {
-    if (digit === "." || pointNumber) {
-        if (isFirstNumber) {
-            firstNumber = firstNumber + digit;
-            result.innerText = firstNumber;
+    if (isFirstNumber) {
+        if(Number.isInteger(firstNumber) && digit !== ".") {
+            firstNumber = (firstNumber * 10) + digit;
         } else {
-            secondNumber = secondNumber + digit;
-            result.innerText = secondNumber;
-        } 
-        pointNumber = true;
-    }
-    else if (isFirstNumber) {
-        firstNumber = (firstNumber * 10) + digit;
+            firstNumber = firstNumber + digit;
+        }
         result.innerText = firstNumber;
     } else {
-        secondNumber = (secondNumber * 10) + digit;
+        if(Number.isInteger(secondNumber) && digit !== ".") {
+            secondNumber = (secondNumber * 10) + digit;
+        } else {
+            secondNumber = secondNumber + digit;
+        }
         result.innerText = secondNumber;
     } 
 }
 
-for(let i=0; i<=9; i++) {
+for (let i=0; i<=9; i++) {
     document.querySelector('#digit'+i).addEventListener('click', function() {
         buildNumber(i);
     });
@@ -52,7 +50,6 @@ function multipleOperations() {
         firstNumber = operation(lastOperator);
         secondNumber = 0;
     }
-    
     lastOperator = operator;
     history.innerText = `${firstNumber} ${operator}`;
 }
@@ -94,8 +91,14 @@ modulo.addEventListener('click', function() {
 radical.addEventListener('click', function() {
     isFirstNumber = false;
     operator = "√";
-    result.innerText = operator;
-    history.innerText = `${firstNumber} ${operator}`;
+    let number = 0;
+    if (secondNumber) {
+        number = secondNumber;
+    } else {
+        number = firstNumber;
+    }
+    result.innerText = operation(operator);
+    operator = lastOperator;
 });
 
 equals.addEventListener('click', function() {
@@ -118,8 +121,8 @@ clear.addEventListener('click', function() {
 
 function operation(operator) {
     let res = 0;
-firstNumber = parseFloat(firstNumber);
-secondNumber = parseFloat(secondNumber);
+    firstNumber = parseFloat(firstNumber);
+    secondNumber = parseFloat(secondNumber);
     switch (operator) {
         case '*':
             res = firstNumber * secondNumber;
@@ -131,16 +134,27 @@ secondNumber = parseFloat(secondNumber);
             res = firstNumber - secondNumber;
             break;
         case '/':
-            res = firstNumber / secondNumber;
+            if (secondNumber === 0) {
+                return res = "Cannot divide by zero"
+            } else {
+                res = firstNumber / secondNumber;
+            }
             break;
         case '%':
             res = firstNumber % secondNumber;
             break;
         case '√':
-            res = Math.sqrt(firstNumber);
+            if (secondNumber) {
+                res = Math.sqrt(secondNumber);
+                secondNumber = res;
+            } else {
+                res = Math.sqrt(firstNumber);
+                firstNumber = res;
+            }
             break;
         default:
-            alert("Stop");
+            alert("An invalid format was used !");
     }
-    return res;
+    history.innerText = parseFloat(res.toPrecision(6));
+    return parseFloat(res.toPrecision(6));
 }

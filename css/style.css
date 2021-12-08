@@ -1,3 +1,18 @@
+:root {
+    --body-background: linear-gradient(to right,#6699FF, #31408F);
+    --color-numbers: white;
+    --background-buttons: linear-gradient(45deg,#03A6FF, #0080FF);
+    --background-calculator: rgba(163,218,255, 0.2);
+    --border-calculator: 0.3em solid #1EC0FF;
+    --background-operations: #5C33F6;
+    --background-clear: #f9c00c;
+    --background-equals: linear-gradient(45deg,#6699FF, #31408F);
+    --background-display: rgba(0, 0, 0, 0.5);
+    --shadow-calculator: 0 0.3em 0.5em 0 rgba(92, 51, 246, 0.2), 0 0.5em 1.2em 0 rgba(92, 51, 246, 0.19);
+    --color-history: #03A6FF;
+    --color-result: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +20,7 @@
 }
 
 body{
-    background: linear-gradient(to right,#6699FF, #31408F);
+    background: var(--body-background);
     background-repeat: no-repeat;
     height: 100vh;
     display: flex;
@@ -13,15 +28,15 @@ body{
 .calculator {
     margin: auto;
     height: 40em;
-    background: rgba(163,218,255, 0.2);
+    background: var(--background-calculator);
     position: relative;
     border-radius: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 10px 10px 10px rgba(3,166,255, 0.5); 
-    border-top: 5px solid #1EC0FF;
-    border-bottom: 5px solid #1EC0FF;
+    box-shadow: var(--shadow-calculator); 
+    border-top: var(--border-calculator);
+    border-bottom: var(--border-calculator);
 }
 
 .line button {
@@ -34,8 +49,8 @@ body{
     position: abolute;
     font-size: 0.9em;
     font-weight: 600;
-    background: linear-gradient(45deg,#03A6FF, #0080FF);
-    color: white;
+    background: var(--background-buttons);
+    color: var(--color-numbers);
 }
 
 .digits {
@@ -55,7 +70,7 @@ body{
 }
 
 .display {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--background-display);
     width: 90%;
     margin: 0 auto 2em auto;
     border-radius: 1em;
@@ -68,7 +83,7 @@ body{
 .result {
     margin: 0.1em 0.5em;
     text-align: end;
-    color: white;
+    color: var(--color-result);
     font-size: 2em;
     font-weight: 600;
 }
@@ -76,18 +91,18 @@ body{
 .history {
     margin: 0.1em 1em;
     text-align: end;
-    color: #03A6FF;
+    color: var(--color-history);
     font-size: 1em;
 }
 
 #clear {
-    background: #f9c00c;
+    background: var(--background-clear);
 }
 
 #equals {
-    background: linear-gradient(45deg,#6699FF, #31408F);
+    background: var(--background-equals);
 }
 
 #multiply, #add, #subtract, #divide {
-    background-color: #5C33F6;
+    background: var(--background-operations);
 }
