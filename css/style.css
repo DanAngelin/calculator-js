@@ -24,6 +24,8 @@ body{
     background-repeat: no-repeat;
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .calculator {
     margin: auto;
@@ -51,6 +53,12 @@ body{
     font-weight: 600;
     background: var(--background-buttons);
     color: var(--color-numbers);
+    box-shadow: 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0px 1px rgba(0, 0, 0, 0.2);
 }
 
 .digits {
@@ -105,4 +113,9 @@ body{
 
 #multiply, #add, #subtract, #divide {
     background: var(--background-operations);
+}
+
+.footer {
+    display: flex;
+    color: white;
 }

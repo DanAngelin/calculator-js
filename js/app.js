@@ -158,3 +158,7 @@ function operation(operator) {
     history.innerText = parseFloat(res.toPrecision(6));
     return parseFloat(res.toPrecision(6));
 }
+
+let time = new Date();
+let year = time.getFullYear();
+document.querySelector('.year').innerText = `${year}`;
